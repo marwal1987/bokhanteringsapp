@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  // State för att hålla böckerna, initialt en tom array
   const [books, setBooks] = useState([]);
-  // State för att hålla värden från formuläret
-
   const [formValues, setFormValues] = useState({
     id: null,
     title: "",
@@ -13,14 +10,12 @@ function App() {
     isbn: "",
     publishYear: "",
   });
-
-  // State för att hålla koll på om vi är i redigeringsläge
   const [isEditing, setIsEditing] = useState(false);
 
   // useEffect hook för att hämta böcker vid komponentens (App i det här fallet) första render
   useEffect(() => {
     fetchBooks();
-  }, []); 
+  }, []);
 
   // async/await funktion som hämtar böcker från API:et (eller som i mitt fall en json-server)
   const fetchBooks = async () => {
@@ -37,7 +32,7 @@ function App() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({
-      ...formValues, 
+      ...formValues,
       [name]: value,
     });
   };
@@ -189,4 +184,3 @@ function App() {
 }
 
 export default App;
-
