@@ -1,0 +1,67 @@
+{
+  "books": [
+    {
+      "id": "1",
+      "title": "Den stora boken om kodning",
+      "author": "Alice Svensson",
+      "isbn": "978-1-23456-789-0",
+      "publishYear": 2021,
+      "genre": "Teknik",
+      "pages": 320,
+      "language": "Svenska",
+      "price": 299.99
+    },
+    {
+      "id": "2",
+      "title": "Äventyr i det okända",
+      "author": "Erik Johansson",
+      "isbn": "978-0-12345-678-9",
+      "publishYear": 2019,
+      "genre": "Fantasy",
+      "pages": 450,
+      "language": "Svenska",
+      "price": 349.99
+    },
+    {
+      "id": "3",
+      "title": "Hälsa och välbefinnande",
+      "author": "Maria Karlsson",
+      "isbn": "978-3-45678-901-2",
+      "publishYear": 2022,
+      "genre": "Hälsa",
+      "pages": 250,
+      "language": "Svenska",
+      "price": 199.99
+    },
+    {
+      "id": "4",
+      "title": "Mysteriet med det försvunna arvet",
+      "author": "Johan Nilsson",
+      "isbn": "978-4-56789-012-3",
+      "publishYear": 2020,
+      "genre": "Mysterium",
+      "pages": 360,
+      "language": "Svenska",
+      "price": 279.99
+    },
+    {
+      "id": "5",
+      "title": "Den historiska romanen",
+      "author": "Eva Andersson",
+      "isbn": "978-5-67890-123-4",
+      "publishYear": 2018,
+      "genre": "Historisk",
+      "pages": 400,
+      "language": "Svenska",
+      "price": 329.99
+    },
+    {
+      "id": 1724825048660,
+      "title": "Grönsak eller döden",
+      "author": "Karl Törnqvist",
+      "isbn": "978-0-12345-987-9",
+      "publishYear": "1234",
+      "language": "Svenska"
+    }
+  ]
+}

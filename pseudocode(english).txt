@@ -1,0 +1,80 @@
+// Import necessary modules/libraries
+IMPORT React library
+IMPORT useState, useEffect hooks from React
+IMPORT CSS file for styling
+
+// Main Component: App
+FUNCTION App() 
+    // Declare state to store books (initially an empty list)
+    INITIALIZE books as an empty list
+    
+    // Declare state to store form values (containing fields like id, title, author, isbn, publishYear, language)
+    INITIALIZE formValues with empty fields
+    
+    // Declare state to track whether the user is editing an existing book
+    INITIALIZE isEditing as false
+
+    // useEffect hook to fetch books from the API when the component is first rendered
+    useEffect(
+        CALL fetchBooks TO fetch book data from API
+    ) (only on the first render)
+
+    // Function to fetch books from API (or local server)
+    ASYNCHRONOUS FUNCTION fetchBooks()
+        TRY 
+            MAKE a GET request to the API TO fetch book data
+            CONVERT data to JSON
+            UPDATE books with the fetched data
+        CATCH (on error)
+            LOG the error to the console
+
+    // Function to handle changes in the form fields
+    FUNCTION handleInputChange(event)
+        EXTRACT name and value from event.target
+        UPDATE formValues with the new value based on the field's name
+
+    // Function to handle form submission (both for adding and updating books)
+    ASYNCHRONOUS FUNCTION handleFormSubmit(event)
+        PREVENT the form from reloading
+        IF (isEditing is true) 
+            // Edit an existing book
+            TRY 
+                MAKE a PUT request to the API TO update the book
+                UPDATE books with the new details
+                CLOSE the editing mode (setIsEditing to false)
+            CATCH (on error)
+                LOG the error to the console
+        ELSE 
+            // Add a new book
+            TRY 
+                MAKE a POST request to the API TO create a new book
+                CONVERT the response to JSON and add it to books
+            CATCH (on error)
+                LOG the error to the console
+        
+        // Clear the form fields
+        RESET formValues
+
+    // Function to handle editing a book
+    FUNCTION handleEdit(book)
+        FILL formValues with the selected book's details
+        ACTIVATE editing mode (setIsEditing to true)
+
+    // Function to handle deleting a book
+    ASYNCHRONOUS FUNCTION handleDelete(id)
+        TRY 
+            MAKE a DELETE request to the API TO remove the book
+            FILTER out the deleted book from books
+        CATCH (on error)
+            LOG the error to the console
+
+    // Return JSX to render the component
+    RETURN (
+        DIV main container
+            SECTION: Form Section
+                HEADING: "Book Manager"
+                FORM to handle input and submission
+                    HEADING: "Add New Book" or "Update Book" depending on editing mode
+                    LABEL and INPUT for "Title"
+                    LABEL and INPUT for "Author"
+             

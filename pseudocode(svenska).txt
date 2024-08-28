@@ -1,0 +1,97 @@
+// Importera nödvändiga moduler/bibliotek
+IMPORT React bibliotek
+IMPORT useState, useEffect hooks från React
+IMPORT CSS-fil för styling
+
+// Huvudkomponent: App
+FUNKTION App() 
+    // Deklarera state för att lagra böcker (initialt en tom lista)
+    INITIALISERA books som en tom lista
+    
+    // Deklarera state för att lagra formulärvärden (innehåller fält som id, title, author, isbn, publishYear, language)
+    INITIALISERA formValues med tomma fält
+    
+    // Deklarera state för att hålla reda på om användaren redigerar en befintlig bok
+    INITIALISERA isEditing som false
+
+    // useEffect hook för att hämta böcker från API vid komponentens första render
+    useEffect(
+        KALLA på fetchBooks FÖR ATT hämta bokdata från API
+    ) (endast vid första renderingen)
+
+    // Funktion för att hämta böcker från API (eller lokal server)
+    ASYNKRON FUNKTION fetchBooks()
+        TRY 
+            GÖR ett GET-anrop till API FÖR ATT hämta bokdata
+            OMVANDLA data till JSON
+            UPPDATERA books med den hämtade datan
+        CATCH (vid fel)
+            LOGGA felet till konsolen
+
+    // Funktion för att hantera ändringar i formulärfälten
+    FUNKTION handleInputChange(event)
+        EXTRAHERA name och value från event.target
+        UPPDATERA formValues med nytt värde baserat på fältets namn
+
+    // Funktion för att hantera formulärets inskick (både för att lägga till och uppdatera böcker)
+    ASYNKRON FUNKTION handleFormSubmit(event)
+        FÖRHINDRA att formuläret laddas om
+        IF (isEditing är true) 
+            // Redigera en befintlig bok
+            TRY 
+                GÖR ett PUT-anrop till API FÖR ATT uppdatera boken
+                UPPDATERA books med de nya uppgifterna
+                STÄNG redigeringsläget (setIsEditing till false)
+            CATCH (vid fel)
+                LOGGA felet till konsolen
+        ELSE 
+            // Lägg till en ny bok
+            TRY 
+                GÖR ett POST-anrop till API FÖR ATT skapa en ny bok
+                OMVANDLA svaret till JSON och lägg till i books
+            CATCH (vid fel)
+                LOGGA felet till konsolen
+        
+        // Rensa formulärfälten
+        TÖM formValues
+
+    // Funktion för att hantera redigering av en bok
+    FUNKTION handleEdit(book)
+        FYLL formValues med den valda bokens uppgifter
+        AKTIVERA redigeringsläge (setIsEditing till true)
+
+    // Funktion för att hantera radering av en bok
+    ASYNKRON FUNKTION handleDelete(id)
+        TRY 
+            GÖR ett DELETE-anrop till API FÖR ATT ta bort boken
+            FILTRERA bort den raderade boken från books
+        CATCH (vid fel)
+            LOGGA felet till konsolen
+
+    // Returnera JSX för att rendera komponenten
+    RETURNERA (
+        DIV huvudcontainer
+            SEKCION: Formulärsektion
+                RUBRIK: "Book Manager"
+                FORM för att hantera inmatning och inskickning
+                    RUBRIK: "Add New Book" eller "Update Book" beroende på redigeringsläge
+                    LABEL och INPUT för "Title"
+                    LABEL och INPUT för "Author"
+                    LABEL och INPUT för "ISBN"
+                    LABEL och INPUT för "Publish Year"
+                    LABEL och INPUT för "Language"
+                    KNAPP för att skicka formuläret ("Add Book" eller "Save Changes")
+                
+            SEKCION: Boklista
+                RUBRIK: "Book List"
+                UL lista med böcker
+                    LOOPA IGENOM books och rendera LI för varje bok
+                        VISUALISERA bokens titel, författare, ISBN, publiceringsår, och språk
+                        KNAPP för att redigera boken (handleEdit)
+                        KNAPP för att radera boken (handleDelete)
+    )
+}
+
+// Exportera huvudkomponenten
+EXPORTERA App
+
